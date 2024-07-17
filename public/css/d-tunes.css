@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Monda:wght@400..700&display=swap');
+:root {
+    --black-olive: #343633;
+    --zomp: #519e8a;
+    --buff: #f0e68c;
+    --sunset: #efd09e;
+    --lilac: #c3acce;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+html {
+    background-color: white;
+}
+
+li {
+    list-style: none;
+}
+
+hr {
+    width: 90%;
+    opacity: 0.1;
+}
+body {
+    background: #faf9f9;
+    font-family: "Sora", sans-serif;
+    margin: 30px;
+}
+
+nav {
+    width: 100%;
+    height: 8%;
+    background-color: var(--black-olive);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+nav > * {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.nav__element {
+    width: 104px;
+    border-radius: 14px;
+    list-style: none;
+    margin-right: 10px;
+    text-align: center;
+    color: var(--sunset);
+    font-family: Monda;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.nav__element--wrapper {
+    padding: 3px;
+    border-radius: 12px;
+    color: var(--black-olive);
+    background: var(--sunset);
+}
+.nav__img {
+    width: 47px;
+    height: 47px;
+    flex-shrink: 0;
+}
+/* ----------------------- */
+.song__card {
+    width: 369px;
+    padding: 16px 24px;
+    gap: 10px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #f0e68c 0%, #efd09e 100%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 30px;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.song__card--img {
+    width: 69px;
+    height: 69px;
+    border-radius: 12px;
+    background: #dedede;
+}
+
+.song__meta {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.song__meta > * {
+    margin: 0px;
+}
+
+.song__card--title {
+    color: #000;
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: "Sora";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.song__card--duration {
+    color: #666;
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: "Sora";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.song__card--artist {
+    color: #3c3c43;
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: "Sora";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

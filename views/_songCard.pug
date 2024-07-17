@@ -1,0 +1,7 @@
+mixin songCard(song)
+    .song__card
+        img.song__card--img(src=`api/v1/songs/${song._id}/image` alt='')
+        .song__meta
+            h3.song__card--title= song.title
+            p.song__card--duration= song.duration
+            h5.song__card--artist= song.artists

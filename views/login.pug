@@ -1,0 +1,23 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet' href='/css/login.css')
+        title Login
+    body
+        main.main
+            h1(style='text-align: center; font-size: 50px;') D TUNES
+            .login-form
+                h2.heading-secondary.ma-bt-lg Log into your account
+                form.form
+                    .form__group
+                        label.form__label(for='inputEmail') Email address
+                        input#inputEmail.form__input(type='inputEmail' placeholder='Your E-mail' required='required' pattern=".+@.+\...+")
+                    .form__group.ma-bt-md
+                        label.form__label(for='inputPassword') Password
+                        input#inputPassword.form__input(type='password' placeholder='Your Password' required='required' minlength='8')
+                    .form__group
+                        button.btn.btn--green Login
+        footer
+            include _footer
