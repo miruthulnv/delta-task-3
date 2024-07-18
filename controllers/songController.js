@@ -2,8 +2,10 @@ import * as factory from "./handlerFactory.js";
 import Song from "../models/songModel.js";
 import AppError from "../utils/appError.js";
 import ApiFeatures from "../utils/apiFeatures.js";
+import {Buffer} from 'buffer';
 import slugify from "slugify";
 import catchAsync from "../utils/catchAsync.js";
+import {parseFile} from 'music-metadata';
 
 export const getAllSongs = factory.getAll(Song);
 export const createSong = factory.createOne(Song);
@@ -62,7 +64,7 @@ export const getAllAlbums = async (req, res,) => {
     });
 };
 
-export const getSongImage = catchAsync(async (req,res,next) =>{
+export const getSongImageFromDB = catchAsync(async (req,res,next) =>{
     const song = await Song.findById(req.params.id).select('+image.data +image.contentType');
 
     if (!song || !song.image){
@@ -72,4 +74,17 @@ export const getSongImage = catchAsync(async (req,res,next) =>{
         res.set('Content-Type', song.image.contentType);
         res.send(song.image.data);
     }
+});
+
+export const getSongImageFromDisk = catchAsync(async (req,res,next) =>{
+    const song = await Song.findById(req.params.id)
+    if (!song){
+        return next(new AppError('No song found with that ID', 404));
+    }
+    console.log(song)
+    const songName = song.filename;
+    const metadata = await parseFile(`public/music/${songName}`);
+    const picture = Buffer.from(metadata.common.picture[0].data);
+    res.set('Content-Type', 'image/png');
+    res.send(picture);
 })

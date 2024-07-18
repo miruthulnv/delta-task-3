@@ -3,28 +3,31 @@ html
     head
         meta(charset='UTF-8')
         meta(name='viewport' content='width=device-width, initial-scale=1.0')
-        link(rel='stylesheet' href='css/d-tunes.css')
-        link(rel='stylesheet' href='css/home.css')
+        link(rel='stylesheet' href='/css/d-tunes.css')
+        link(rel='stylesheet' href='/css/song.css')
         title D-Tunes
     body
         header
             include _header
         main
-            .song__header--big Song Title
+            .song__header--big= song.title
             .song__container--big
-                img.song__card--big-img(src='./../assets/cover-img.jpeg' alt='')
+                img.song__card--big-img(src=`/api/v1/songs/${song._id}/image` alt='')
                 .song__meta--big
-                    h3.song__album--big Album Name - 2020
-                    h4.song__language--big Tamil
-                    h4.song__artists--big A.R.Rahman, Sid Sriram
+                    h3.song__album--big= `${song.album} - ${song.year}`
+                    - if (!song.language) song.language = '';
+                    h4.song__language--big= `${song.language}`
+                    h4.song__artists--big= `${song.artists.join(', ')}`
                 .audio-container
                     audio#player(controls='' controllist='nodownload')
-                        source(src='Badass-MassTamilan.dev.mp3' type='audio/mpeg')
+                        source(src=`/music/${song.filename}` type='audio/mpeg')
                         |                     Your browser does not support the audio element.
             secion.sidebar
                 h1.sidebar_header More Like This
                 .song__container
                     include _songCard
+                    for moreSong in songs
+                        +songCard(moreSong)
 
         footer
             include _footer

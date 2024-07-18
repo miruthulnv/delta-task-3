@@ -1,6 +1,12 @@
 mixin songCard(song)
+    - const min =String(Math.trunc(song.duration/60)).padStart(2,'0');
+    - const sec = String(Math.trunc(song.duration)%60).padStart(2,'0');
+    - song.duration = `${min}:${sec}`
+    - song.artists = song.artists.join(', ');
+    - if (song.artists.length > 20) song.artists =song.artists.slice(0,20) + `...`;
+    - if  (song.title.length > 15) song.title = song.title.slice(0,15) + `...`;
     .song__card
-        img.song__card--img(src=`api/v1/songs/${song._id}/image` alt='')
+        img.song__card--img(src=`/api/v1/songs/${song._id}/image` alt='')
         .song__meta
             h3.song__card--title= song.title
             p.song__card--duration= song.duration

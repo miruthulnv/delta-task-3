@@ -1,20 +1,13 @@
-
+import axios from 'axios';
 import Song from '../models/songModel.js';
 import catchAsync from "../utils/catchAsync.js";
 
 export const getHome = catchAsync(async (req, res) => {
     // find 10 songs randomly from the database
     const songs = await Song.aggregate([
-        { $sample: { size: 8 } }
+        {$sample: {size: 8}}
     ]);
-    songs.forEach(el =>{
-        const min =String(Math.trunc(el.duration/60)).padStart(2,'0');
-        const sec = String(Math.trunc(el.duration)%60).padStart(2,'0');
-        el.duration = `${min}:${sec}`
-        el.artists = el.artists.join(', ');
-        if (el.artists.length> 20) el.artists =el.artists.slice(0,20) + `...`;
-        if  (el.title.length> 15) el.title = el.title.slice(0,15) + `...`;
-    });
+
     res.status(200).render('home', {
         songs,
     })
@@ -22,6 +15,9 @@ export const getHome = catchAsync(async (req, res) => {
 
 export const getSong = catchAsync(async (req, res) => {
     const song = await Song.findById(req.params.id);
+    const songs = await Song.aggregate([
+        {$sample: {size: 8}}
+    ]);
     console.log(song)
     if (!song) {
         return res.status(404).json({
@@ -29,13 +25,24 @@ export const getSong = catchAsync(async (req, res) => {
             message: 'No song found with that ID'
         })
     }
-    res.status(200).render('login.pug');
+    res.status(200).render('song.pug', {
+        song,
+        songs
+    });
 })
 
-export const getLogin = (req,res) =>{
+export const getAlbum = catchAsync(async (req, res) => {
+    const response = await axios.get('http://127.0.0.1:8000/api/v1/songs/albums');
+    res.status(200).render('album.pug',{
+        album: response.data
+    });
+
+})
+
+export const getLogin = (req, res) => {
     res.status(200).render('song.pug');
 }
 
-export const getSignup = (req,res) =>{
+export const getSignup = (req, res) => {
     res.status(200).render('signup.pug');
 }

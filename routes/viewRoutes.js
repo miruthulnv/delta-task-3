@@ -8,5 +8,5 @@ router.get("/", viewController.getHome);
 router.get("/login", viewController.getLogin);
 router.get("/signup", viewController.getSignup);
 router.route('/song/:id').get(viewController.getSong);
-
+router.route('/albums').get(viewController.getAlbum);
 export default router;

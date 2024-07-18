@@ -15,7 +15,7 @@ router.route('/albums')
     .get(songController.getAllAlbums);
 
 router.route('/:id/image')
-    .get(songController.getSongImage);
+    .get(songController.getSongImageFromDisk);
 
 router.route('/:id/like')
     .patch(authController.protect, songController.likeSong);
