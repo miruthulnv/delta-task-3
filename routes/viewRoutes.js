@@ -4,9 +4,12 @@ import * as authController from "./../controllers/authController.js";
 
 const router = express.Router();
 
-router.get("/", viewController.getHome);
-router.get("/login", viewController.getLogin);
-router.get("/signup", viewController.getSignup);
+router.route("/signup").get(viewController.getSignup);
+router.route("/login").get(viewController.getLogin);
+
+router.use(authController.isLoggedIn)
+
+router.route("/").get(viewController.getHome);
 router.route('/song/:id').get(viewController.getSong);
 router.route('/albums').get(viewController.getAlbum);
 export default router;

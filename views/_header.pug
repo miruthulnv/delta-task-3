@@ -5,11 +5,14 @@ nav
                 .nav__element--wrapper
                     | D Tunes
         li.nav__element
-            a(href='#') Home
+            a(href='/') Home
         li.nav__element
             a(href='#') Friends
     ul.nav__right
-        li.nav__element
-            a(href='#') Login
-        li.nav__element
-            a(href='#') Sign up
+        if user
+            li.nav__element.nav__element--logout Logout
+        else
+            li.nav__element
+                a(href='/login') Login
+            li.nav__element
+                a(href='/signup') Sign up

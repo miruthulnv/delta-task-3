@@ -63,6 +63,11 @@ nav > * {
     font-weight: 600;
     line-height: normal;
 }
+
+.nav__element--logout{
+    cursor: pointer;
+}
+
 .nav__element--wrapper {
     padding: 3px;
     border-radius: 12px;
@@ -86,6 +91,7 @@ nav > * {
     margin-left: 0px;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 }
 
 .song__card--img {
@@ -133,4 +139,27 @@ nav > * {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+.alert {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 9999;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 1.6rem 15rem;
+    -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+}
+.alert--success {
+    background-color: #519E8A;
+}
+.alert--error {
+    background-color: #eb4d4b;
 }

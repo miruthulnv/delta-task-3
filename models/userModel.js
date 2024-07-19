@@ -65,6 +65,10 @@ userSchema.pre('save',async function(next){
     next();
 });
 
+userSchema.methods.passwordExpired = function(JWTTime){
+    const changedTime = this.passwordChangedAt.getTime()/1000;
+    return changedTime> JWTTime;
+}
 const User = mongoose.model('User',userSchema);
 
 export default User;

@@ -19,7 +19,7 @@ html
                     h4.song__language--big= `${song.language}`
                     h4.song__artists--big= `${song.artists.join(', ')}`
                 .audio-container
-                    audio#player(controls='' controllist='nodownload')
+                    audio#player(controls autoplay )
                         source(src=`/music/${song.filename}` type='audio/mpeg')
                         |                     Your browser does not support the audio element.
             secion.sidebar

@@ -1,0 +1,66 @@
+.album__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.album__card {
+    width: 369px;
+    padding: 16px 24px;
+    gap: 10px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #f0e68c 0%, #efd09e 100%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 30px;
+    margin-left: 60px;
+    display: flex;
+    flex-direction: row;
+}
+
+.album__card--img {
+    width: 69px;
+    height: 69px;
+    border-radius: 12px;
+    background: #dedede;
+}
+
+.album__meta {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.album__meta > * {
+    margin: 0px;
+}
+
+.album__card--title {
+    color: #000;
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: "Sora";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.album__card--duration {
+    color: #666;
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: "Sora";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.album__card--artist {
+    color: #3c3c43;
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: "Sora";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

@@ -5,13 +5,11 @@ html {
 
 body {
     background-color: #f7f7f7;
-
     line-height: 1.6;
     font-weight: 300;
     font-family: "Lato", sans-serif;
     color: #777;
-    padding: 3rem;
-    min-height: 100vh;
+    min-height: 90vh;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
@@ -23,7 +21,7 @@ body {
     text-transform: uppercase;
     font-weight: 700;
     /* background-image: linear-gradient(to right, #7dd56f, #28b487); */
-    color: #7dd56f;
+    color: #343633;
     letter-spacing: 0.1rem;
     line-height: 1.3;
     display: inline-block;
@@ -40,17 +38,6 @@ body {
     font-weight: 300;
 }
 .heading-primary span,
-.heading-tertirary span {
-    padding: 1rem 1.5rem;
-    line-height: 1;
-    box-decoration-break: clone;
-    background-image: linear-gradient(
-            to bottom right,
-            rgba(125, 213, 111, 0.85),
-            rgba(40, 180, 135, 0.85)
-    );
-}
-
 .heading-primary {
     font-size: 5rem;
     text-align: center;
@@ -98,7 +85,7 @@ body {
 
 .btn:focus {
     outline: none;
-    background-color: #2e864b;
+    background-color: #343633;
 }
 
 .btn--white {
@@ -110,11 +97,11 @@ body {
 }
 
 .btn--green {
-    background-color: #55c57a;
+    background-color: #343633;
     color: #fff;
 }
 .btn--green::after {
-    background-color: #55c57a;
+    background-color: #343633;
 }
 
 .btn--small {
@@ -125,7 +112,7 @@ body {
 .btn-small,
 .btn-small:link,
 .btn-small:visited {
-    background-color: #55c57a;
+    background-color: #343633;
     color: #fff;
     font-size: 1.4rem;
     padding: 1.25rem 3rem;
@@ -140,12 +127,12 @@ body {
 }
 
 .btn-small:hover {
-    background-color: #7dd56f;
+    background-color: #343633;
 }
 
 .btn-text:link,
 .btn-text:visited {
-    color: #55c57a;
+    color: #343633;
     display: inline-block;
     text-decoration: none;
     border-bottom: 1px solid #55c57a;
@@ -154,7 +141,7 @@ body {
 }
 
 .btn-text:hover {
-    background-color: #55c57a;
+    background-color: #343633;
     color: #fff;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
@@ -186,19 +173,18 @@ body {
 }
 
 .main {
-    padding: 8rem 6rem;
-    -ms-flex: 1;
-    flex: 1;
     position: relative;
 }
 
-.login-form {
+.login-form, .signup-form {
     margin: 0 auto;
-    max-width: 35rem;
+    min-width: 400px;
+    max-width: 500px;
     background-color: #fff;
     box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
     padding: 5rem 7rem;
     border-radius: 5px;
+    margin-top:4%;
 }
 
 .form__input {
@@ -209,15 +195,12 @@ body {
     padding: 1.25rem 1.75rem;
     border: none;
     width: 100%;
-    background-color: #fff;
     background-color: #f2f2f2;
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
     transition: all 0.3s;
     border-radius: 4px;
     box-sizing: border-box;
-    /* Pseudo element (a visible thing that isn't really in the DOM).
-        Also needs -ms- */
 }
 .form__input:focus {
     outline: none;
@@ -263,21 +246,21 @@ body {
 }
 
 .form__upload:focus + label {
-    outline: 3px solid #55c57a;
+    outline: 3px solid #343633;
     outline-offset: 3px;
 }
 
 .form__upload + label {
-    color: #55c57a;
+    color: #343633;
     display: inline-block;
     text-decoration: none;
-    border-bottom: 1px solid #55c57a;
+    border-bottom: 1px solid #343633;
     padding: 3px;
     transition: all 0.2s;
     cursor: pointer;
 }
 .form__upload + label:hover {
-    background-color: #55c57a;
+    background-color: #343633;
     color: #fff;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);

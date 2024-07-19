@@ -2,27 +2,32 @@ doctype html
 head
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='/css/d-tunes.css')
     link(rel='stylesheet' href='/css/login.css')
-    title Login
+    title Sign Up
 main.main
-    h1(style='text-align: center; font-size: 50px;') D TUNES
-    .login-form
-        h2.heading-secondary.ma-bt-lg Create your account
-        form.form
-            .form__group
-                label.form__label(for='inputName') Name
-                input#inputName.form__input(type='inputName' placeholder='Your Name' required='required')
-            .form__group
-                label.form__label(for='inputEmail') Email address
-                input#inputEmail.form__input(type='email' placeholder='Your E-mail' required='required')
-            .form__group
-                label.form__label(for='inputRole') Role
-                input#inputRole.form__input(type='inputRole' value='user' required='required' readonly='readonly')
-            .form__group.ma-bt-md
-                label.form__label(for='inputPassword') Password
-                input#inputPassword.form__input(type='password' placeholder='Enter your password' required='required' minlength='8')
-            .form__group.ma-bt-md
-                label.form__label(for='confirmPassword') Confirm Password
-                input#confirmPassword.form__input(type='password' placeholder='Confirm password' required='required' minlength='8')
-            .form__group
-                button.btn.btn--green Login
+    header
+        include _header
+    main.main
+        .signup-form
+            h2.heading-secondary.ma-bt-lg Welcome to D Tunes
+            form.form
+                .form__group
+                    label.form__label(for='inputName') Name
+                    input#inputName.form__input(type='inputName' placeholder='Your Name' required='required')
+                .form__group
+                    label.form__label(for='inputEmail') Email address
+                    input#inputEmail.form__input(type='email' placeholder='Your E-mail' required='required')
+                .form__group
+                    label.form__label(for='inputRole') Role
+                    input#inputRole.form__input(type='inputRole' value='user' required='required' readonly='readonly')
+                .form__group.ma-bt-md
+                    label.form__label(for='inputPassword') Password
+                    input#inputPassword.form__input(type='password' placeholder='Enter your password' required='required' minlength='8')
+                .form__group.ma-bt-md
+                    label.form__label(for='inputPasswordConfirm') Confirm Password
+                    input#inputPasswordConfirm.form__input(type='password' placeholder='Confirm password' required='required' minlength='8')
+                .form__group
+                    button.btn.btn--green Sign Up
+    footer
+        include _footer

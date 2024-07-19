@@ -39,6 +39,8 @@ export const getAllAlbums = async (req, res,) => {
                 numSongs: {$sum: 1}, // Count songs per album
                 totDuration: {$sum: '$duration'}, // Sum of durations per album
                 songTitles: {$push: '$title'}, // Collect song titles per album
+                albumArtist: {$first: '$albumArtist'}, // Get the first artist per album
+                sampleSong : {$first: '$_id'}
             }
         },
         {
@@ -48,6 +50,8 @@ export const getAllAlbums = async (req, res,) => {
                 numSongs: 1,
                 totDuration: 1,
                 songTitles: 1,
+                albumArtist: 1,
+                sampleSong: 1,
             }
         },
         // Add any other stages like $sort here
@@ -81,7 +85,6 @@ export const getSongImageFromDisk = catchAsync(async (req,res,next) =>{
     if (!song){
         return next(new AppError('No song found with that ID', 404));
     }
-    console.log(song)
     const songName = song.filename;
     const metadata = await parseFile(`public/music/${songName}`);
     const picture = Buffer.from(metadata.common.picture[0].data);
