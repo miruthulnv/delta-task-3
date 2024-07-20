@@ -16,9 +16,6 @@ const playlistSchema = new mongoose.Schema({
         ref: 'Song',
         count: {type: Number, default: 0}
     }],
-    coverImg:{
-        type: String,
-    },
     public:{
         type: Boolean,
         default: true,

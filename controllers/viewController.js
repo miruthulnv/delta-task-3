@@ -2,6 +2,7 @@ import axios from 'axios';
 import Song from '../models/songModel.js';
 import catchAsync from "../utils/catchAsync.js";
 import * as authController from './authController.js';
+import AppError from "../utils/appError.js";
 export const getHome = catchAsync(async (req, res) => {
     // find 10 songs randomly from the database
     const songs = await Song.aggregate([
@@ -50,3 +51,31 @@ export const getLogin = (req, res) => {
 export const getSignup = (req, res) => {
     res.status(200).render('signup.pug');
 }
+
+export const getSongsInAlbum = catchAsync(async (req,res,next)=>{
+    const albumSlug = req.params.albumSlug;
+    const albumSongs = await Song.find({albumSlug});
+    console.log(albumSongs)
+    if (!albumSongs || albumSongs.length === 0){
+        return next(new AppError('No album found with that slug', 404));
+    };
+    res.status(200).render('albumSongs.pug',{
+        albumSongs,
+    });
+});
+
+export const getSearch = catchAsync(async (req,res)=>{
+    const query = req.query.q;
+    const response = await Song.find({
+        $or: [
+            { title: { $regex: query, $options: 'i' } },
+            { album: { $regex: query, $options: 'i' } },
+            { albumArtist: { $regex: query, $options: 'i' } },
+            { genre: { $regex: query, $options: 'i' } }
+        ]
+    });
+    res.status(200).render('search.pug',{
+        songs: response,
+        query: query
+    })
+})

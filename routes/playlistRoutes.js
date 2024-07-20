@@ -5,11 +5,14 @@ import * as  playlistController from './../controllers/playlistController.js'
 const router = express.Router();
 
 
-router.route('/getAll').get(playlistController.getAllPlaylists);
-router.route('/create').get(playlistController.createPlaylist);
-router.route('/getUser/:id').get(playlistController.getPlaylist);
-router.route('/update/:id').patch(playlistController.updatePlaylist);
-router.route('/delete/:id').delete(playlistController.deletePlaylist);
+router.route('/').get(playlistController.getAllPlaylists)
+    .post(authController.protect,
+        playlistController.addUserToPlaylist,
+        playlistController.createPlaylist);
+router.route('/:id')
+    .get(playlistController.getPlaylist)
+    .patch(playlistController.updatePlaylist)
+    .delete(playlistController.deletePlaylist);
 
 
 

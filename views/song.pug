@@ -5,6 +5,7 @@ html
         meta(name='viewport' content='width=device-width, initial-scale=1.0')
         link(rel='stylesheet' href='/css/d-tunes.css')
         link(rel='stylesheet' href='/css/song.css')
+        link(rel='stylesheet' href='/css/modal.css')
         title D-Tunes
     body
         header
@@ -14,7 +15,13 @@ html
             .song__container--big
                 img.song__card--big-img(src=`/api/v1/songs/${song._id}/image` alt='')
                 .song__meta--big
-                    h3.song__album--big= `${song.album} - ${song.year}`
+                    h3.song__album--big
+                        .text= `${song.album} - ${song.year}`
+                        .like
+                            span.like__count #{song.likesCount}
+                            |
+                            span.song__like--button
+                                img(src='/img/static/like.svg' alt='like' height='18px')
                     - if (!song.language) song.language = '';
                     h4.song__language--big= `${song.language}`
                     h4.song__artists--big= `${song.artists.join(', ')}`
@@ -28,6 +35,20 @@ html
                     include _songCard
                     for moreSong in songs
                         +songCard(moreSong)
+
+        #myModal.modal
+            .modal-content
+                span.close &times;
+                h2 SELECT PLAYLISTS
+                form#modalForm
+                    label Option 1
+                        input(type="checkbox" name="option1" value="Option 1")
+                    br
+                    label Option 2
+                        input(type="checkbox" name="option2" value="Option 2")
+                    br
+
+                    button(type="submit") Submit
 
         footer
             include _footer

@@ -18,18 +18,45 @@ export const likeSong = async (req, res, next) => {
     const songId = req.params.id;
     const song = await Song.findOne({_id: songId});
     if (user.likedSongs.includes(songId)) {
-        return next(new AppError('Song already liked', 400));
-    } else {
+        user.likedSongs.splice(user.likedSongs.indexOf(songId),1);
+        await user.save({validateBeforeSave: false});
+        song.likesCount--;
+        await song.save({validateBeforeSave: false});
+        res.status(200).json({
+            status: 'success',
+            message: 'Song unliked',
+        })
+    }
+    else {
         user.likedSongs.push(songId);
         await user.save({validateBeforeSave: false});
         song.likesCount++;
         await song.save({validateBeforeSave: false});
         res.status(200).json({
             status: 'success',
-            message: 'Song liked successfully',
+            message: 'Song liked',
         });
     }
 };
+
+export const isSongLiked = catchAsync(async (req, res) => {
+    const user = req.user;
+    const songId = req.params.id;
+    if (user.likedSongs.includes(songId)) {
+        res.status(200).json({
+            status: 'success',
+            message: 'Song is liked',
+            like: true,
+        });
+    } else {
+        res.status(200).json({
+            status: 'success',
+            message: 'Song is not liked',
+            like: false,
+        });
+    }
+
+})
 
 export const getAllAlbums = async (req, res,) => {
     const albums = await Song.aggregate([
@@ -91,3 +118,5 @@ export const getSongImageFromDisk = catchAsync(async (req,res,next) =>{
     res.set('Content-Type', 'image/png');
     res.send(picture);
 })
+
+

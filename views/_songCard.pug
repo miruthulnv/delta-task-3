@@ -1,14 +1,16 @@
 mixin songCard(song)
-    - const min =String(Math.trunc(song.duration/60)).padStart(2,'0');
-    - const sec = String(Math.trunc(song.duration)%60).padStart(2,'0');
-    - song.duration = `${min}:${sec}`
-    - song.artists = song.artists.join(', ');
-    - if (song.artists.length > 20) song.artists =song.artists.slice(0,20) + `...`;
-    - if  (song.title.length > 15) song.title = song.title.slice(0,15) + `...`;
+    - const min =String(Math.trunc(song.duration/60)).padStart(2,'0')
+    - const sec = String(Math.trunc(song.duration) % 60).padStart(2, '0')
+    - let duration = `${min}:${sec}`
+    - let artists = song.artists.join(', ')
+    - let title = song.title
+    - if (artists.length > 20) artists = artists.slice(0, 20) + `...`
+    - if (song.title.length > 15) title = song.title.slice(0, 15) + `...`;
     a(href=`/song/${song._id}`)
         .song__card
             img.song__card--img(src=`/api/v1/songs/${song._id}/image` alt='')
             .song__meta
-                h3.song__card--title= song.title
-                p.song__card--duration= song.duration
-                h5.song__card--artist= song.artists
+                h3.song__card--title= title
+                p.song__card--duration=duration
+                h5.song__card--artist= artists
+                p.song__card--like= `${song.likesCount} ❤️`

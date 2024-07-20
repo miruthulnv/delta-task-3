@@ -79,6 +79,10 @@ nav > * {
     height: 47px;
     flex-shrink: 0;
 }
+
+.searchbox>*{
+    padding: 7px;
+}
 /* ----------------------- */
 .song__card {
     width: 369px;

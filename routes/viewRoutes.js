@@ -12,4 +12,7 @@ router.use(authController.isLoggedIn)
 router.route("/").get(viewController.getHome);
 router.route('/song/:id').get(viewController.getSong);
 router.route('/albums').get(viewController.getAlbum);
+router.route('/albums/:albumSlug').get(viewController.getSongsInAlbum);
+router.route('/search').get(viewController.getSearch);
+
 export default router;

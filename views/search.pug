@@ -1,0 +1,22 @@
+include _songCard
+
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='/css/d-tunes.css')
+    link(rel='stylesheet' href='/css/home.css')
+    title  🔎 #{query}
+body
+    header
+        include _header
+    main.main
+        h2.heading-secondary.ma-bt-lg Results for #{query}
+        if songs.length
+            .song__container
+                each song in songs
+                    +songCard(song)
+        else
+            p No songs found for #{query}
+    footer
+        include _footer

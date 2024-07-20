@@ -72,6 +72,10 @@ export const protect = catchAsync(async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     const id = decoded.id;
     req.user = await User.findOne({_id: id});
+    if (!req.user) {
+        return next(new AppError('Log in Again. The is no user assigned with your token.',400))
+    }
+    console.log(req.user)
     next();
 });
 

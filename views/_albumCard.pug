@@ -1,7 +1,8 @@
 mixin albumCard(album)
-    .album__card
-        img.album__card--img(src=`/api/v1/songs/${album.sampleSong}/image` alt='')
-        .album__meta
-            h3.album__card--title= album.albumName
-            p.album__card--songs #{album.numSongs} Songs
-            h5.album__card--artist #{album.albumArtist}
+    a(href=`/albums/${album.slug}`)
+        .album__card
+            img.album__card--img(src=`/api/v1/songs/${album.sampleSong}/image` alt='')
+            .album__meta
+                h3.album__card--title= album.albumName
+                p.album__card--songs #{album.numSongs} Songs
+                h5.album__card--artist #{album.albumArtist}

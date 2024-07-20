@@ -8,6 +8,10 @@ nav
             a(href='/') Home
         li.nav__element
             a(href='#') Friends
+    ul.nav__middle
+        div.searchbox
+            button.searchbox__button 🔎
+            input.searchbox__input(type='text' placeholder='Search')
     ul.nav__right
         if user
             li.nav__element.nav__element--logout Logout
