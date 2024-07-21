@@ -18,12 +18,10 @@ html
                     .cat__card
                         img.cat__card--img(src='/img/static/album.svg' alt='')
                         h3.cat__card--text ALBUM
-                .cat__card
-                    img.cat__card--img(src='/img/static/playlist.svg' alt='')
-                    h3.cat__card--text PLAYLIST
-                .cat__card
-                    img.cat__card--img(src='/img/static/language.svg' alt='')
-                    h3.cat__card--text LANGUAGE
+                a(href='http://127.0.0.1:8000/playlist')
+                    .cat__card
+                        img.cat__card--img(src='/img/static/playlist.svg' alt='')
+                        h3.cat__card--text PLAYLIST
             section.main__bg
                 img.main__bg--img(src='/img/static/music temp.svg' alt='')
         hr

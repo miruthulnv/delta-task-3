@@ -1,0 +1,43 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet' href='/css/d-tunes.css')
+        link(rel='stylesheet' href='/css/song.css')
+        link(rel='stylesheet' href='/css/modal.css')
+        title D-Tunes
+    body
+        header
+            include _header
+        main
+            - console.log(songs)
+            .song__header--big= song.title
+            .song__container--big
+                img.song__card--big-img(src=`/api/v1/songs/${song._id}/image` alt='')
+                .song__meta--big
+                    h3.song__album--big
+                        .text= `${song.album} - ${song.year || ''}`
+                        .like
+                            span.like__count #{song.likesCount}
+                            |
+                            span.song__like--button
+                                img(src='/img/static/like.svg' alt='like' height='18px')
+                    - if (song.language === "undefined" || song.language === "Unknown" ) song.language = ' -- ';
+                    h4.song__language--big= `${song.language}`
+                        h4= `${song.artists.join(', ')}`
+
+                .audio-container
+                    audio#player(controls autoplay )
+                        source(src=`/music/${song.filename}` type='audio/mpeg')
+                        |                     Your browser does not support the audio element.
+            secion.sidebar
+                h1.sidebar_header= `Playlist : ${playlist.name}`
+                .song__container
+                    include _songCard
+                    for moreSong in songs
+                        div(style='pointer-events: none; cursor: not-allowed;')
+                            +songCard(moreSong)
+
+        footer
+            include _footer

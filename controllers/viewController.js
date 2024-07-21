@@ -43,13 +43,26 @@ export const getAlbum = catchAsync(async (req, res) => {
 
 })
 
-export const getPlaylist = catchAsync(async (req, res) => {
+export const getPlaylists = catchAsync(async (req, res) => {
     const playlists = await Playlist.find({user: req.user});
     res.status(200).render('playlist.pug',{
         playlists,
     });
-
 });
+
+export const getPlaylistForUser = catchAsync(async (req, res) => {
+    const playlist = await Playlist.findById(req.params.id);
+    const songs = await Song.find({_id: {$in: playlist.songs}});
+
+    if (!playlist) {
+        return next(new AppError('No playlist found with that ID', 404));
+    }
+    res.status(200).render('playlistPage.pug',{
+        songs,
+        playlist,
+        song: songs[0]
+    });
+})
 
 export const getLogin = (req, res) => {
     if (req.cookies.jwt){
