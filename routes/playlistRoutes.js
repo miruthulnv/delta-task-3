@@ -14,6 +14,8 @@ router.route('/:id')
     .patch(playlistController.updatePlaylist)
     .delete(playlistController.deletePlaylist);
 
-
+router.route('/:id/updateSongs')
+    .post(authController.protect, playlistController.addSongToPlaylist)
+    .delete(authController.protect, playlistController.removeSongFromPlaylist);
 
 export default router;

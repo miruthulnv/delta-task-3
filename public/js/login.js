@@ -5,7 +5,7 @@ export const login = async (email, password) => {
     try{
         const res = await axios({
             method: "POST",
-            url: "http://127.0.0.1:8000/api/v1/users/login",
+            url: `${process.env.DOMAIN}/api/v1/users/login`,
             data:{
                 email,
                 password,
@@ -26,7 +26,7 @@ export const logout = async()=>{
     try{
         const res = await axios({
             method: "GET",
-            url: "http://127.0.0.1:8000/api/v1/users/logout",
+            url: `${process.env.DOMAIN}/api/v1/users/logout`,
         });
         if (res.data.status === 'success'){
             showAlert('success','Logged out successfully');
@@ -44,7 +44,7 @@ export const signup = async (name, email,role, password, confirmPassword) => {
     try{
         const res = await axios({
             method: "POST",
-            url: "http://127.0.0.1:8000/api/v1/users/signup",
+            url: `${process.env.DOMAIN}/api/v1/users/signup`,
             data: {
                 name,
                 email,

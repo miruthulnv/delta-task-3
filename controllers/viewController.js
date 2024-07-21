@@ -3,6 +3,7 @@ import Song from '../models/songModel.js';
 import catchAsync from "../utils/catchAsync.js";
 import * as authController from './authController.js';
 import AppError from "../utils/appError.js";
+import Playlist from "../models/playlistModel.js";
 export const getHome = catchAsync(async (req, res) => {
     // find 10 songs randomly from the database
     const songs = await Song.aggregate([
@@ -16,6 +17,7 @@ export const getHome = catchAsync(async (req, res) => {
 
 export const getSong = catchAsync(async (req, res) => {
     const song = await Song.findById(req.params.id);
+    const playlists = await Playlist.find();
     const songs = await Song.aggregate([
         {$sample: {size: 8}}
     ]);
@@ -27,7 +29,8 @@ export const getSong = catchAsync(async (req, res) => {
     }
     res.status(200).render('song.pug', {
         song,
-        songs
+        songs,
+        playlists
     });
 })
 

@@ -41,14 +41,20 @@ html
                 span.close &times;
                 h2 SELECT PLAYLISTS
                 form#modalForm
-                    label Option 1
-                        input(type="checkbox" name="option1" value="Option 1")
-                    br
-                    label Option 2
-                        input(type="checkbox" name="option2" value="Option 2")
-                    br
-
-                    button(type="submit") Submit
+                    for playlist in playlists
+                        label
+                            - if (playlist.songs.includes(song._id))
+                                input(type='checkbox' name='playlists' value=`${playlist._id}` checked)
+                            - else
+                                input(type='checkbox' name='playlists' value=`${playlist._id}`)
+                            | #{playlist.name}
+                        br
+                    // Text box to add new playlist
+                    label ADD NEW PLAYLIST
+                        input(type='text' id='newPlaylist' name='newPlaylist' placeholder='New Playlist')
+                    span.modal--buttons
+                        button(type="cancel") Cancel
+                        button(type="submit") Submit
 
         footer
             include _footer

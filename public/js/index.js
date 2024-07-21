@@ -1,16 +1,17 @@
 import {login, logout,signup} from './login.js';
 import {likeSong, updateStatus} from './like.js';
 import '@babel/polyfill';
+import {addPlaylist, addSong,removeSong} from "./playlist.js";
 
 
 console.log('Hello from the client side');
-
 const loginForm = document.querySelector('.login-form > .form');
 const logoutBtn = document.querySelector('.nav__element--logout');
 const signupForm = document.querySelector('.signup-form > .form');
 const likeBtn = document.querySelector('.song__like--button');
 const searchBtn = document.querySelector('.searchbox__button');
 const searchInput = document.querySelector('.searchbox__input');
+const modalForm = document.getElementById('modalForm');
 const modal = document.getElementById("myModal");
 const btn = document.getElementById("openModal");
 const span = document.getElementsByClassName("close")[0];
@@ -51,6 +52,28 @@ searchInput?.addEventListener('keypress', function(event) {
     }
 });
 
-btn?.onclick = function() {
-    modal.style.display = "block";
-}
+modalForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const songId = window.location.href.split('/').pop();
+    console.log('Form submitted');
+    // Get list of all the check boxes chosen in that form
+    const checkboxes = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(el=> el.value);
+    const uncheckboxes = [...document.querySelectorAll('input[type="checkbox"]:not(:checked)')].map(el=> el.value);
+    await checkboxes.forEach(el => {
+           addSong(el, songId);
+           // Add songs to all these playlists
+    });
+    await uncheckboxes.forEach(el => {
+        // Remove songs from all these playlists
+        removeSong(el,songId);
+    });
+    // Get the input text given by user
+
+    const inputText = document.getElementById('newPlaylist').value;
+    if (inputText!== '') {
+        const playlistId = await addPlaylist(inputText);
+        // Create a new playlist with input text and add song to that
+        await addSong(playlistId, songId);
+    }
+});
+
