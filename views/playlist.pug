@@ -1,0 +1,20 @@
+
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet' href='/css/d-tunes.css')
+        link(rel='stylesheet' href='/css/album.css')
+        title My Playlists
+    body
+        header
+            include _header
+        main
+            h1.playlist__header My Playlists
+            .album__container
+                include _playlistCard
+                for playlist in playlists
+                    +playlistCard(playlist)
+        footer
+            include _footer

@@ -104,3 +104,11 @@ audio{
     grid-template-rows: repeat(1fr, 3);
     width: 80%;
 }
+
+.song__language--big{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+

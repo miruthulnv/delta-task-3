@@ -13,10 +13,22 @@ export const addSong = async (playlistId, songId) => {
                 }
             }
         );
-        showAlert("success", response.data.message);
     } catch (err) {
         console.log(err)
-        showAlert("error", err.response.data.message);
+    }
+}
+
+export const removeSong = async (playlistId, songId) => {
+    try {
+        await axios({
+            method: "DELETE",
+            url: `/api/v1/playlists/${playlistId}/updateSongs`,
+            data: {
+                song: songId,
+            }
+        });
+    } catch (err) {
+        console.log(err)
     }
 }
 
@@ -30,24 +42,43 @@ export const addPlaylist = async (name) => {
             }
         });
         const playlistId = response.data.data._id;
-        showAlert("success", response.data.message);
         return playlistId;
     } catch (err) {
-        showAlert("error", err.response.data.message);
+        console.log(err)
     }
 }
 
-export const removeSong = async (playlistId, songId) => {
-    try {
-        const response = await axios({
-            method: "DELETE",
-            url: `/api/v1/playlists/${playlistId}/updateSongs`,
-            data: {
-                song: songId,
-            }
+export const closePlaylistModal = () => {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+export const submitPlaylistModel = async (e) => {
+    e.preventDefault();
+    try{
+        const songId = window.location.href.split('/').pop();
+        console.log('Form submitted');
+        // Get list of all the check boxes chosen in that form
+        const checkboxes = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(el=> el.value);
+        const uncheckboxes = [...document.querySelectorAll('input[type="checkbox"]:not(:checked)')].map(el=> el.value);
+        await checkboxes.forEach(el => {
+            addSong(el, songId);
+            // Add songs to all these playlists
         });
-        showAlert("success", response.data.message);
-    } catch (err) {
-        showAlert("error", err.response.data.message);
+        await uncheckboxes.forEach(el => {
+            // Remove songs from all these playlists
+            removeSong(el,songId);
+        });
+        // Get the input text given by user
+
+        const inputText = document.getElementById('newPlaylist').value;
+        if (inputText!== '') {
+            const playlistId = await addPlaylist(inputText);
+            // Create a new playlist with input text and add song to that
+            await addSong(playlistId, songId);
+        }
+        showAlert('success','Updated playlist(s)');
+        closePlaylistModal();
+    }catch(err){
+        showAlert('error',err.response.data.message);
     }
 }

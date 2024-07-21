@@ -3,7 +3,8 @@ import Song from '../models/songModel.js';
 import catchAsync from "../utils/catchAsync.js";
 import * as authController from './authController.js';
 import AppError from "../utils/appError.js";
-import Playlist from "../models/playlistModel.js";
+import Playlist from "../models/playlistModel.js"
+
 export const getHome = catchAsync(async (req, res) => {
     // find 10 songs randomly from the database
     const songs = await Song.aggregate([
@@ -17,7 +18,7 @@ export const getHome = catchAsync(async (req, res) => {
 
 export const getSong = catchAsync(async (req, res) => {
     const song = await Song.findById(req.params.id);
-    const playlists = await Playlist.find();
+    const playlists = await Playlist.find({user: req.user});
     const songs = await Song.aggregate([
         {$sample: {size: 8}}
     ]);
@@ -41,6 +42,14 @@ export const getAlbum = catchAsync(async (req, res) => {
     });
 
 })
+
+export const getPlaylist = catchAsync(async (req, res) => {
+    const playlists = await Playlist.find({user: req.user});
+    res.status(200).render('playlist.pug',{
+        playlists,
+    });
+
+});
 
 export const getLogin = (req, res) => {
     if (req.cookies.jwt){

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Song from "./songModel.js";
 
 const playlistSchema = new mongoose.Schema({
     name:{
@@ -16,10 +17,28 @@ const playlistSchema = new mongoose.Schema({
         ref: 'Song',
         count: {type: Number, default: 0}
     }],
-    public:{
+    public: {
         type: Boolean,
         default: true,
+    },
+    duration:{
+        type: Number,
+        default: 0,
+    },
+},{
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true},
+});
+
+//Create middleware to update duration before saving
+playlistSchema.pre('save',async function(next){
+    this.duration = 0;
+    for (let i=0;i<this.songs.length;i++){
+        const song = await Song.findById(this.songs[i]);
+        this.duration += song.duration;
     }
+    console.log(this.duration)
+    next();
 });
 
 const Playlist = new mongoose.model('Playlist',playlistSchema);

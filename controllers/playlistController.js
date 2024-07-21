@@ -13,7 +13,10 @@ export const deletePlaylist = factory.deleteOne(Playlist);
 
 export const addSongToPlaylist = catchAsync(async (req, res, next) => {
     const playlist = await Playlist.findById(req.params.id);
-    if(!playlist) next(new AppError('No playlist found with that ID', 404));
+    if(!playlist) return next(new AppError('No playlist found with that ID', 404));
+    console.log('hii');
+    console.log(playlist.user, req.user._id)
+    if(String(req.user._id)!==String(playlist.user)) return next(new AppError('You are not authorized to add songs to this playlist', 401));
     if (!playlist.songs.includes(req.body.song)) {
         playlist.songs.push(req.body.song);
     }
@@ -26,7 +29,8 @@ export const addSongToPlaylist = catchAsync(async (req, res, next) => {
 
 export const removeSongFromPlaylist = catchAsync(async (req, res, next) => {
     const playlist = await Playlist.findById(req.params.id);
-    if(!playlist) next(new AppError('No playlist found with that ID', 404));
+    if(!playlist) return next(new AppError('No playlist found with that ID', 404));
+    if(String(req.user._id)!==String(playlist.user)) return next(new AppError('You are not authorized to remove songs from this playlist', 401));
     if (playlist.songs.includes(req.body.song)) {
         playlist.songs.splice(playlist.songs.indexOf(req.body.song), 1);
     }

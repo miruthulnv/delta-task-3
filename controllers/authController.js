@@ -17,8 +17,8 @@ const createSendToken = function (user, statusCode, res) {
         expires: new Date(Date.now() + process.env.JWT_COOKIE_VALID * 24 * 60 * 60 * 1000),
         httpOnly: true,
     }
-    console.log('All prepared to send token')
-    console.log(process.env.JWT_COOKIE_VALID);
+    // console.log('All prepared to send token')
+    // console.log(process.env.JWT_COOKIE_VALID);
     res.cookie('jwt', token, cookieOptions);
     res.status(statusCode).json({
         status: 'success',
@@ -28,7 +28,7 @@ const createSendToken = function (user, statusCode, res) {
 }
 
 export const signUp = catchAsync(async (req, res, next) => {
-    console.log('Inside sign up');
+    // console.log('Inside sign up');
     const userRole = (req.body.role !== 'admin') ? req.body.role : 'user';
     const newUser = await User.create({
         name: req.body.name,
@@ -37,7 +37,7 @@ export const signUp = catchAsync(async (req, res, next) => {
         confirmPassword: req.body.confirmPassword,
         role: userRole,
     });
-    console.log('created token.. initiating to send token')
+    // console.log('created token.. initiating to send token')
     createSendToken(newUser, 201, res);
 });
 
@@ -75,7 +75,7 @@ export const protect = catchAsync(async (req, res, next) => {
     if (!req.user) {
         return next(new AppError('Log in Again. The is no user assigned with your token.',400))
     }
-    console.log(req.user)
+    // console.log(req.user)
     next();
 });
 
@@ -102,7 +102,7 @@ export const logout = (req, res) => {
 
 export const isLoggedIn = async (req, res, next) => {
     try {
-        console.log('checking if logged in..')
+        // console.log('checking if logged in..')
         let token;
         if (req.cookies.jwt) {
             token = req.cookies.jwt;
@@ -120,7 +120,7 @@ export const isLoggedIn = async (req, res, next) => {
         }
         return next();
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         return next();
     }
 }

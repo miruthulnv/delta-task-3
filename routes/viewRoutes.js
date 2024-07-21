@@ -7,10 +7,11 @@ const router = express.Router();
 router.route("/signup").get(viewController.getSignup);
 router.route("/login").get(viewController.getLogin);
 
-router.use(authController.isLoggedIn)
+router.use(authController.isLoggedIn);
 
 router.route("/").get(viewController.getHome);
-router.route('/song/:id').get(viewController.getSong);
+router.route('/playlist').get(authController.protect,viewController.getPlaylist);
+router.route('/song/:id').get(authController.protect, viewController.getSong);
 router.route('/albums').get(viewController.getAlbum);
 router.route('/albums/:albumSlug').get(viewController.getSongsInAlbum);
 router.route('/search').get(viewController.getSearch);

@@ -16,15 +16,18 @@ html
                 img.song__card--big-img(src=`/api/v1/songs/${song._id}/image` alt='')
                 .song__meta--big
                     h3.song__album--big
-                        .text= `${song.album} - ${song.year}`
+                        .text= `${song.album} - ${song.year || ''}`
                         .like
                             span.like__count #{song.likesCount}
                             |
                             span.song__like--button
                                 img(src='/img/static/like.svg' alt='like' height='18px')
-                    - if (!song.language) song.language = '';
+                    - if (song.language === "undefined" || song.language === "Unknown" ) song.language = ' -- ';
                     h4.song__language--big= `${song.language}`
+                        span.song__card--playlist
+                            img(src='/img/static/playlist.svg' alt='playlist' height='30px')
                     h4.song__artists--big= `${song.artists.join(', ')}`
+
                 .audio-container
                     audio#player(controls autoplay )
                         source(src=`/music/${song.filename}` type='audio/mpeg')
@@ -50,11 +53,10 @@ html
                             | #{playlist.name}
                         br
                     // Text box to add new playlist
-                    label ADD NEW PLAYLIST
+                    label Add New Playlist
+                        br
                         input(type='text' id='newPlaylist' name='newPlaylist' placeholder='New Playlist')
                     span.modal--buttons
-                        button(type="cancel") Cancel
-                        button(type="submit") Submit
-
+                        button(type="submit" id="submitButton") Submit
         footer
             include _footer
