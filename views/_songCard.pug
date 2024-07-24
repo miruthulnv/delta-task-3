@@ -6,11 +6,10 @@ mixin songCard(song)
     - let title = song.title
     - if (artists.length > 20) artists = artists.slice(0, 20) + `...`
     - if (song.title.length > 15) title = song.title.slice(0, 15) + `...`;
-    a(href=`/song/${song._id}`)
-        .song__card
-            img.song__card--img(src=`/api/v1/songs/${song._id}/image` alt='')
-            .song__meta
-                h3.song__card--title= title
-                p.song__card--duration=duration
-                h5.song__card--artist= artists
-                p.song__card--like= `${song.likesCount} ❤️`
+    .song__card(id=`${song._id}`)
+        img.song__card--img(src=`/api/v1/songs/${song._id}/image` alt='')
+        .song__meta
+            h3.song__card--title= title
+            p.song__card--duration=duration
+            h5.song__card--artist= artists
+            p.song__card--like= `${song.likesCount} ❤️`

@@ -12,7 +12,7 @@ html
             include _header
         main
             .song__header--big= song.title
-            .song__container--big
+            .song__container--big(id = `${song.id}`)
                 img.song__card--big-img(src=`/api/v1/songs/${song._id}/image` alt='')
                 .song__meta--big
                     h3.song__album--big

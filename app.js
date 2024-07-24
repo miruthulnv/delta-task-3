@@ -14,7 +14,7 @@ import globalErrorHandler from "./controllers/errorController.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-app.use(express.json())
+app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname,`public`)));

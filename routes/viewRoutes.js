@@ -11,7 +11,7 @@ router.use(authController.isLoggedIn);
 
 router.route("/").get(viewController.getHome);
 router.route('/playlist').get(authController.protect,viewController.getPlaylists);
-router.route('/playlist/:id').get(authController.protect,viewController.getPlaylistForUser);
+router.route('/playlist/:id/song/:songNum').get(authController.protect,viewController.getPlaylistForUser);
 router.route('/song/:id').get(authController.protect, viewController.getSong);
 router.route('/albums').get(viewController.getAlbum);
 router.route('/albums/:albumSlug').get(viewController.getSongsInAlbum);

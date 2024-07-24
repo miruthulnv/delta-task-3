@@ -4,7 +4,7 @@ mixin playlistCard(playlist)
     - let duration = `${min}:${sec}`
     - let title = playlist.name
     - if (playlist.name.length > 15) title = playlist.name.slice(0, 15) + `...`;
-    a(href=`/playlist/${playlist._id}`)
+    a(href=`/playlist/${playlist._id}/song/1`)
         .song__card
             img.song__card--img(src=`/api/v1/songs/${playlist.songs[0]}/image` alt='playlist img')
             .song__meta

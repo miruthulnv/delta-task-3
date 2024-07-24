@@ -43,7 +43,7 @@ export const getAlbum = catchAsync(async (req, res) => {
 
 })
 
-export const getPlaylists = catchAsync(async (req, res) => {
+export const getPlaylists = catchAsync(async (req, res,next) => {
     const playlists = await Playlist.find({user: req.user});
     res.status(200).render('playlist.pug',{
         playlists,
@@ -53,21 +53,22 @@ export const getPlaylists = catchAsync(async (req, res) => {
 export const getPlaylistForUser = catchAsync(async (req, res) => {
     const playlist = await Playlist.findById(req.params.id);
     const songs = await Song.find({_id: {$in: playlist.songs}});
+    const songNum = req.params.songNum;
 
     if (!playlist) {
         return next(new AppError('No playlist found with that ID', 404));
     }
+    console.log(playlist.songs.length)
     res.status(200).render('playlistPage.pug',{
         songs,
         playlist,
-        song: songs[0]
+        song: songs[(songNum-1)%playlist.songs.length],
     });
 })
 
 export const getLogin = (req, res) => {
     if (req.cookies.jwt){
         res.status(200).redirect('/');
-        console.log('No need you are already logged in.')
     } else{
         res.status(200).render('login.pug');
     }

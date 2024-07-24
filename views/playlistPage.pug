@@ -11,9 +11,8 @@ html
         header
             include _header
         main
-            - console.log(songs)
             .song__header--big= song.title
-            .song__container--big
+            .song__container--big(id = `${song._id}`)
                 img.song__card--big-img(src=`/api/v1/songs/${song._id}/image` alt='')
                 .song__meta--big
                     h3.song__album--big
@@ -28,16 +27,17 @@ html
                         h4= `${song.artists.join(', ')}`
 
                 .audio-container
-                    audio#player(controls autoplay )
+                    audio#playerInPlaylist(controls autoplay )
                         source(src=`/music/${song.filename}` type='audio/mpeg')
                         |                     Your browser does not support the audio element.
             secion.sidebar
                 h1.sidebar_header= `Playlist : ${playlist.name}`
                 .song__container
                     include _songCard
-                    for moreSong in songs
-                        div(style='pointer-events: none; cursor: not-allowed;')
-                            +songCard(moreSong)
+                    for moreSong,i in songs
+                        div()
+                            a(href=`/playlist/${playlist._id}/song/${i+1}`)
+                                +songCard(moreSong)
 
         footer
             include _footer

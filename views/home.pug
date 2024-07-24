@@ -29,6 +29,7 @@ html
             .song__header Top Picks . . Just for you,
             .song__container
                  for song in songs
-                    +songCard(song)
+                    a(href=`/song/${song._id}`)
+                        +songCard(song)
         footer
             include _footer

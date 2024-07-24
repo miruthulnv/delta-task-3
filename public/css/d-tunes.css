@@ -32,6 +32,7 @@ hr {
 }
 body {
     background: #faf9f9;
+    height: fit-content;
     font-family: "Sora", sans-serif;
     margin: 30px;
 }

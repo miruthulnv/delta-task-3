@@ -10,7 +10,6 @@ export const getPlaylist = factory.getOne(Playlist)
 export const updatePlaylist = factory.updateOne(Playlist);
 export const deletePlaylist = factory.deleteOne(Playlist);
 
-
 export const addSongToPlaylist = catchAsync(async (req, res, next) => {
     const playlist = await Playlist.findById(req.params.id);
     if(!playlist) return next(new AppError('No playlist found with that ID', 404));
@@ -26,7 +25,6 @@ export const addSongToPlaylist = catchAsync(async (req, res, next) => {
         message: 'Song added to playlist',
     })
 });
-
 export const removeSongFromPlaylist = catchAsync(async (req, res, next) => {
     const playlist = await Playlist.findById(req.params.id);
     if(!playlist) return next(new AppError('No playlist found with that ID', 404));

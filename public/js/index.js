@@ -14,6 +14,7 @@ const searchInput = document.querySelector('.searchbox__input');
 const closeModal = document.querySelector('#myModal .close');
 const modalForm = document.getElementById('modalForm');
 const playlistBtn = document.querySelector('.song__card--playlist');
+const audioElement = document.querySelector('#playerInPlaylist');
 
 likeBtn && updateStatus(likeBtn);
 
@@ -59,4 +60,12 @@ modalForm?.addEventListener('submit', submitPlaylistModel)
 
 closeModal?.addEventListener('click', () => {
     document.getElementById('myModal').style.display = 'none';
+});
+
+audioElement?.addEventListener('ended', () => {
+    const currentSongNum = window.location.href.split('/').pop();
+    const nextSongNum = parseInt(currentSongNum) + 1;
+    window.location.href = `/playlist/${window.location.href.split('/')[4]}/song/${nextSongNum}`;
+
+
 });

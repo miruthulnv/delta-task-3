@@ -15,6 +15,7 @@ html
             .song__header Songs in this Album
             .song__container
                 each song in albumSongs
-                    + songCard(song)
+                    a(href=`/song/${song._id}`)
+                        +songCard(song)
         footer
             include _footer
