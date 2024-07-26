@@ -44,7 +44,7 @@ export const addPlaylist = async (name) => {
         const playlistId = response.data.data._id;
         return playlistId;
     } catch (err) {
-        console.log(err)
+        // console.log(err)
     }
 }
 
@@ -80,5 +80,20 @@ export const submitPlaylistModel = async (e) => {
         closePlaylistModal();
     }catch(err){
         showAlert('error',err.response.data.message);
+    }
+}
+
+export const deletePlaylist = async (e)=>{
+    e.preventDefault();
+    const playlistId = document.querySelector('.song__card').getAttribute('id');
+    const op = await axios({
+        method: 'DELETE',
+        url: `/api/v1/playlists/${playlistId}`,
+    });
+    if(op.data.status === 'success'){
+        showAlert('success','Playlist deleted successfully');
+        window.location.href = '/playlists';
+    }else{
+        showAlert('error','Error deleting playlist');
     }
 }

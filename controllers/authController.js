@@ -108,7 +108,7 @@ export const isLoggedIn = async (req, res, next) => {
             token = req.cookies.jwt;
         }
         if (token) {
-            console.log('Fuckkr seems to have a token');
+            // console.log('Fuckkr seems to have a token');
             const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
             const freshUser = await User.findById(decoded.id);
             if (!freshUser) return next();

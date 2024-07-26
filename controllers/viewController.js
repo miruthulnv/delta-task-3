@@ -44,7 +44,8 @@ export const getAlbum = catchAsync(async (req, res) => {
 })
 
 export const getPlaylists = catchAsync(async (req, res,next) => {
-    const playlists = await Playlist.find({user: req.user});
+    //filter such that the length of the song array is gt 0
+    const playlists = await Playlist.find({user: req.user, "songs.0": { "$exists": true }});
     res.status(200).render('playlist.pug',{
         playlists,
     });
@@ -81,7 +82,6 @@ export const getSignup = (req, res) => {
 export const getSongsInAlbum = catchAsync(async (req,res,next)=>{
     const albumSlug = req.params.albumSlug;
     const albumSongs = await Song.find({albumSlug});
-    console.log(albumSongs)
     if (!albumSongs || albumSongs.length === 0){
         return next(new AppError('No album found with that slug', 404));
     };

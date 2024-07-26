@@ -15,7 +15,8 @@ body
         if songs.length
             .song__container
                 each song in songs
-                    +songCard(song)
+                    a(href=`/song/${song._id}`)
+                        +songCard(song)
         else
             p No songs found for #{query}
     footer

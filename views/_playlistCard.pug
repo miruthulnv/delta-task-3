@@ -1,11 +1,12 @@
 mixin playlistCard(playlist)
     - const min =String(Math.trunc(playlist.duration/60)).padStart(2,'0')
     - const sec = String(Math.trunc(playlist.duration) % 60).padStart(2, '0')
-    - let duration = `${min}:${sec}`
-    - let title = playlist.name
+    - duration = `${min}:${sec}`
+    - if (duration==`00:00`) duration = `--:--`
+    - title = playlist.name
     - if (playlist.name.length > 15) title = playlist.name.slice(0, 15) + `...`;
     a(href=`/playlist/${playlist._id}/song/1`)
-        .song__card
+        .song__card(id = `${playlist._id}`)
             img.song__card--img(src=`/api/v1/songs/${playlist.songs[0]}/image` alt='playlist img')
             .song__meta
                 h3.song__card--title= title

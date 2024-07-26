@@ -37,7 +37,8 @@ html
                 .song__container
                     include _songCard
                     for moreSong in songs
-                        +songCard(moreSong)
+                        a(href=`/song/${moreSong._id}`)
+                            +songCard(moreSong)
 
         #myModal.modal
             .modal-content

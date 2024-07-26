@@ -37,7 +37,6 @@ playlistSchema.pre('save',async function(next){
         const song = await Song.findById(this.songs[i]);
         this.duration += song.duration;
     }
-    console.log(this.duration)
     next();
 });
 

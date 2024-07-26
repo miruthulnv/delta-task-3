@@ -1,7 +1,8 @@
 import {login, logout, signup} from './login.js';
 import {likeSong, updateStatus} from './like.js';
 import '@babel/polyfill';
-import {submitPlaylistModel} from "./playlist.js";
+import {submitPlaylistModel,deletePlaylist} from "./playlist.js";
+
 
 
 console.log('Hello from the client side');
@@ -15,6 +16,8 @@ const closeModal = document.querySelector('#myModal .close');
 const modalForm = document.getElementById('modalForm');
 const playlistBtn = document.querySelector('.song__card--playlist');
 const audioElement = document.querySelector('#playerInPlaylist');
+const playlistDelete = document.querySelector('#delete__icon');
+
 
 likeBtn && updateStatus(likeBtn);
 
@@ -66,6 +69,6 @@ audioElement?.addEventListener('ended', () => {
     const currentSongNum = window.location.href.split('/').pop();
     const nextSongNum = parseInt(currentSongNum) + 1;
     window.location.href = `/playlist/${window.location.href.split('/')[4]}/song/${nextSongNum}`;
-
-
 });
+
+playlistDelete?.addEventListener('click',deletePlaylist)
