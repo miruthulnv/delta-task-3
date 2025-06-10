@@ -60,7 +60,8 @@ const userSchema = new mongoose.Schema({
 // The following middleware is for encrypting the password
 userSchema.pre('save',async function(next){
     if (!this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password,12);
+    //TODO
+    this.password = await bcrypt.hash(this.password,"12");
     this.confirmPassword = undefined;
     next();
 });
